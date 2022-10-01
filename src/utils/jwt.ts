@@ -7,5 +7,5 @@ export function signJWT(data: object) {
 }
 
 export function verifyJWT<T>(token: string) {
-    return jwt.sign(token, SECRET) as T;
+    return jwt.verify(token, SECRET) as T;
 }

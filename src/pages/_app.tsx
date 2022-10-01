@@ -1,4 +1,3 @@
-import "../styles/globals.css";
 import superjson from "superjson";
 import { withTRPC } from "@trpc/next";
 import type { AppProps } from "next/app";
@@ -18,9 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <UserContextProvider value={data}>
-      <main>
-      <Component {...pageProps} />;
-      </main>
+      <Component {...pageProps} />
     </UserContextProvider>
   );
 }
