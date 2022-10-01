@@ -6,9 +6,23 @@ import { AppRouter } from "../server/router/app.router";
 import { loggerLink } from "@trpc/client/links/loggerLink";
 import { httpBatchLink } from "@trpc/client/links/httpBatchLink";
 import { url } from "../constants";
+import { trpc } from "../utils/trpc";
+import { UserContextProvider } from "../context/user.context";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+  const { data, isLoading } = trpc.useQuery(["users.me"]);
+
+  if (isLoading) {
+    return <p>loading user...</p>;
+  }
+
+  return (
+    <UserContextProvider value={data}>
+      <main>
+      <Component {...pageProps} />;
+      </main>
+    </UserContextProvider>
+  );
 }
 
 export default withTRPC<AppRouter>({

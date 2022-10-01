@@ -1,14 +1,13 @@
 import { verifyOtpSchema } from "./../../schema/user.schema";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime";
-import {
-  createUserSchema,
-  requestOtpSchema,
-} from "../../schema/user.schema";
+import { createUserSchema, requestOtpSchema } from "../../schema/user.schema";
 import { createRouter } from "./createRouter";
 import * as trpc from "@trpc/server";
 import { sendLoginEmail } from "../../utils/mailer";
 import { baseUrl } from "../../constants";
 import { decode, encode } from "../../utils/base64";
+import { signJWT } from "../../utils/jwt";
+import { serialize } from "cookie";
 
 export const userRouter = createRouter()
   .mutation("register", {
@@ -80,13 +79,33 @@ export const userRouter = createRouter()
       const decoded = decode(input.hash).split(":");
       const [id, email] = decoded;
       const token = await ctx.prisma.loginToken.findFirst({
-        where: { id, user: { email } }, include: { user: true },
+        where: { id, user: { email } },
+        include: { user: true },
       });
-      if(!token) {
+      if (!token) {
         throw new trpc.TRPCError({
-          code: 'FORBIDDEN',
-          message: 'invalid token!!'
-        })
+          code: "FORBIDDEN",
+          message: "invalid token!!",
+        });
       }
+      const jwt = signJWT({
+        email: token.user.email,
+        id: token.user.id,
+      });
+      ctx.res.setHeader(
+        "Set-Cookie",
+        serialize("token", jwt, {
+          path: "/",
+        })
+      );
+
+      return {
+        redirect: token.redirect,
+      };
+    },
+  })
+  .query("me", {
+    resolve({ ctx }) {
+      return ctx.user;
     },
   });
