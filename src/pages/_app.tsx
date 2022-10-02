@@ -1,3 +1,4 @@
+import '../styles/global.css';
 import superjson from "superjson";
 import { withTRPC } from "@trpc/next";
 import type { AppProps } from "next/app";

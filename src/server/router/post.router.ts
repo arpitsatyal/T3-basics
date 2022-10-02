@@ -10,28 +10,28 @@ export const postRouter = createRouter()
   .mutation("create", {
     input: createPostSchema,
     async resolve({ ctx, input }) {
-      if(!ctx.user) {
-         new trpc.TRPCError({
-          code: 'FORBIDDEN',
-          message: 'cannot create a post while logged out!'
-        })
+      if (!ctx.user) {
+        new trpc.TRPCError({
+          code: "FORBIDDEN",
+          message: "cannot create a post while logged out!",
+        });
       }
-      const post = await ctx.prisma.post.create({
-        data: {
-          ...input,
-          user: {
-            connect: {
-              id: ctx.user?.id
-            }
-          }
-        }
-      })
-      return post;
+        const post = await ctx.prisma.post.create({
+          data: {
+            ...input,
+            user: {
+              connect: {
+                id: ctx.user?.id,
+              },
+            },
+          },
+        });
+        return post;
     },
   })
   .query("posts", {
     resolve({ ctx }) {
-      return ctx.prisma.post.findMany()
+      return ctx.prisma.post.findMany();
     },
   })
   .query("single-post", {
@@ -39,8 +39,8 @@ export const postRouter = createRouter()
     resolve({ input, ctx }) {
       return ctx.prisma.post.findUnique({
         where: {
-          id: input.postId
-        }
-      })
+          id: input.postId,
+        },
+      });
     },
   });

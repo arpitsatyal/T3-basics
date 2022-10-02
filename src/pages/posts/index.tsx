@@ -8,8 +8,8 @@ function PostLists() {
     return <p>loading posts...</p>;
   }
 
-  if(!data?.length) {
-    return <p>there are no posts yet.</p>
+  if (!data?.length) {
+    return <p>there are no posts yet.</p>;
   }
 
   return (

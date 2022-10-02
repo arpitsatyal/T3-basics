@@ -45,7 +45,7 @@ function LoginForm() {
   return (
     <>
       <form onSubmit={handleSubmit(onFinish)}>
-        <h1>Login Page</h1>
+        <h1 className="text-center text-pink-400 text-lg">Login Page</h1>
         <input type="email" placeholder="a@b.com" {...register("email")} />
         <br />
         {error && error.message}
