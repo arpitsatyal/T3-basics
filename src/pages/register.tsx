@@ -8,10 +8,9 @@ function RegisterPage() {
   const router = useRouter();
   const { handleSubmit, register } = useForm<CreateUserInput>();
   const { mutate, error } = trpc.useMutation(["users.register"], {
-    onError: () => {
-    },
+    onError: () => {},
     onSuccess: () => {
-      router.push('/login');
+      router.push("/login");
     },
   });
 
@@ -20,18 +19,43 @@ function RegisterPage() {
   }
 
   return (
-    <>
-        <h1>Register Page</h1>
-      <form onSubmit={handleSubmit(onFinish)}>
-        <input type="email" placeholder="a@b.com" {...register("email")} />
+    <div className="bg-slate-100 h-screen">
+      <h1 className="text-center text-xl py-5">Register Page</h1>
+      <form
+        className="form"
+        onSubmit={handleSubmit(onFinish)}
+      >
+        <div>
+          <label className="">Email: </label>
+          <input
+            type="email"
+            placeholder="a@b.com"
+            {...register("email")}
+            className="input mb-5 ml-2"
+          />
+        </div>
         <br />
-        <input type="text" placeholder="arpit" {...register("name")} />
-        <button type="submit">Register</button>
-        {error && error.message}
+        <div>
+          <label className="">Name: </label>
+          <input
+            type="text"
+            placeholder="arpit"
+            {...register("name")}
+            className="input ml-2"
+          />
+        </div>
+        {error && <p className="text-red-600 mb-2">{error.message}</p>}
+        <button type="submit" className="btn mt-5 ml-5">
+          Register
+        </button>
+        <p>
+          Already have an account?
+          <span className="text-blue-800">
+            <Link href="/login"> Login</Link>
+          </span>
+        </p>
       </form>
-
-      <Link href="/login">Login</Link>
-    </>
+    </div>
   );
 }
 

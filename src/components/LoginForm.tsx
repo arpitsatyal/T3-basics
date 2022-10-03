@@ -43,20 +43,33 @@ function LoginForm() {
   }
 
   return (
-    <>
+    <div className="bg-slate-100 h-screen">
       <form onSubmit={handleSubmit(onFinish)}>
-        <h1 className="text-center text-pink-400 text-lg">Login Page</h1>
-        <input type="email" placeholder="a@b.com" {...register("email")} />
-        <br />
-        {error && error.message}
-        {isLoading && <p>loading...</p>}
-        {success && <p>check yer email</p>}
-
-        <button>Login</button>
+        <h1 className="text-center text-xl py-5">Login Page</h1>
+        <div className="form">
+          <label className="mb-5">Email</label>
+          <input
+            type="email"
+            placeholder="a@b.com"
+            {...register("email")}
+            className="input"
+          />
+          <br />
+         <div className="mb-2">
+         {error && <p className="text-red-600">{error.message}</p>}
+          {isLoading && <p className="text-yellow-900">loading...</p>}
+          {success && <p className="text-green-600">check yer email</p>}
+         </div>
+          <button className="btn">Login</button>
+          <p>
+            Not registered yet?
+            <span className="text-blue-800">
+              <Link href="/register"> Sign up</Link>
+            </span>
+          </p>
+        </div>
       </form>
-
-      <Link href="/register">Register</Link>
-    </>
+    </div>
   );
 }
 

@@ -9,7 +9,7 @@ function CreatePostPage() {
   const { handleSubmit, register } = useForm<CreatePostInput>();
   const { mutate, error, isLoading } = trpc.useMutation(["posts.create"], {
     onSuccess({ id }) {
-      router.push(`posts/${id}`);
+      router.push(`/posts/${id}`);
     },
   });
 
@@ -18,16 +18,30 @@ function CreatePostPage() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {error && error.message}
-      {isLoading && <p>creating...</p>}
-      <h1>create post...</h1>
-      <input type="text" placeholder="post title" {...register("title")} />
-      <br />
-      <textarea placeholder="post body" {...register("body")} />
-      <br />
-      <button>create post.</button>
-    </form>
+    <div className="bg-slate-100 h-screen">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col max-w-md mx-auto space-y-5"
+      >
+        <div className="py-2">
+          {error && <p className="text-red-700">{error.message}</p>}
+          {isLoading && <p className="text-amber-700">creating...</p>}
+        </div>
+        <h1 className="text-center text-xl py-5">create post page</h1>
+        <input
+          type="text"
+          placeholder="post title"
+          {...register("title")}
+          className="input"
+        />
+        <textarea
+          placeholder="post body"
+          {...register("body")}
+          className="placeholder:text-center focus:outline-none"
+        />
+        <button className="btn">create post.</button>
+      </form>
+    </div>
   );
 }
 

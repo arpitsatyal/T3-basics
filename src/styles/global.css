@@ -1,3 +1,16 @@
 @tailwind base; 
 @tailwind components; 
 @tailwind utilities;
+
+@layer components {
+    .btn {
+      @apply bg-orange-500 text-white rounded-full py-2 px-10 mb-5
+    }
+    .input {
+      @apply border rounded-xl py-2 focus:outline-none shadow-md placeholder:text-center 
+    }
+    .form {
+      @apply flex flex-col justify-center items-center max-w-xl mx-auto py-5 bg-white
+    }
+  }
+  
