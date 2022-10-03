@@ -19,12 +19,9 @@ function RegisterPage() {
   }
 
   return (
-    <div className="bg-slate-100 h-screen">
+    <>
       <h1 className="text-center text-xl py-5">Register Page</h1>
-      <form
-        className="form"
-        onSubmit={handleSubmit(onFinish)}
-      >
+      <form className="form" onSubmit={handleSubmit(onFinish)}>
         <div>
           <label className="">Email: </label>
           <input
@@ -55,7 +52,7 @@ function RegisterPage() {
           </span>
         </p>
       </form>
-    </div>
+    </>
   );
 }
 

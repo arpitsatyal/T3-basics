@@ -43,7 +43,6 @@ function LoginForm() {
   }
 
   return (
-    <div className="bg-slate-100 h-screen">
       <form onSubmit={handleSubmit(onFinish)}>
         <h1 className="text-center text-xl py-5">Login Page</h1>
         <div className="form">
@@ -69,7 +68,6 @@ function LoginForm() {
           </p>
         </div>
       </form>
-    </div>
   );
 }
 

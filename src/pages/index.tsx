@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { NextPage } from "next";
+
 import LoginForm from "../components/LoginForm";
 import { useUserContext } from "../context/user.context";
 
@@ -9,7 +10,7 @@ const Home: NextPage = () => {
     return <LoginForm />;
   }
   return (
-    <div className="flex flex-col space-y-5 h-screen justify-center items-center bg-slate-100">
+    <div className="flex flex-col space-y-5 vertical-center">
       <Link href="/posts">
         <p className="link">All Posts</p>
       </Link>

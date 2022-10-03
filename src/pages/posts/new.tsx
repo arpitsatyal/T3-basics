@@ -10,7 +10,7 @@ function CreatePostPage() {
   const { mutate, error, isLoading } = trpc.useMutation(["posts.create"], {
     onSuccess() {
       router.push(`/posts`);
-    }
+    },
   });
 
   function onSubmit(values: CreatePostInput) {
@@ -18,7 +18,7 @@ function CreatePostPage() {
   }
 
   return (
-    <div className="bg-slate-100 h-screen">
+    <>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col max-w-md mx-auto space-y-5"
@@ -41,7 +41,7 @@ function CreatePostPage() {
         />
         <button className="btn">create post.</button>
       </form>
-    </div>
+    </>
   );
 }
 

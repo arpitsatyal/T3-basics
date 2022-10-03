@@ -15,7 +15,7 @@ function PostLists() {
   }
 
   return (
-    <div className="bg-slate-100">
+    <>
       <h1 className="text-center font-bold text-blue-500 py-5">All Posts</h1>
       {data?.map((post) => (
         <article key={post.id} className="bg-white flex border max-w-xl mx-auto flex-col md:flex-row justify-between mb-10">
@@ -32,7 +32,7 @@ function PostLists() {
           </div>
           </article>
       ))}
-    </div>
+    </>
   );
 }
 
