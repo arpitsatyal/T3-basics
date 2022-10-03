@@ -9,9 +9,12 @@ const Home: NextPage = () => {
     return <LoginForm />;
   }
   return (
-    <div>
+    <div className="flex flex-col space-y-5 h-screen justify-center items-center bg-slate-100">
+      <Link href="/posts">
+        <p className="link">All Posts</p>
+      </Link>
       <Link href="/posts/new">
-        <p>Create Post</p>
+        <p className="link">Create Post</p>
       </Link>
     </div>
   );

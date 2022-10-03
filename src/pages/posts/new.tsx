@@ -8,9 +8,9 @@ function CreatePostPage() {
   const router = useRouter();
   const { handleSubmit, register } = useForm<CreatePostInput>();
   const { mutate, error, isLoading } = trpc.useMutation(["posts.create"], {
-    onSuccess({ id }) {
-      router.push(`/posts/${id}`);
-    },
+    onSuccess() {
+      router.push(`/posts`);
+    }
   });
 
   function onSubmit(values: CreatePostInput) {
