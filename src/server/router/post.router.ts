@@ -16,17 +16,17 @@ export const postRouter = createRouter()
           message: "cannot create a post while logged out!",
         });
       }
-        const post = await ctx.prisma.post.create({
-          data: {
-            ...input,
-            user: {
-              connect: {
-                id: ctx.user?.id,
-              },
+      const post = await ctx.prisma.post.create({
+        data: {
+          ...input,
+          user: {
+            connect: {
+              id: ctx.user?.id,
             },
           },
-        });
-        return post;
+        },
+      });
+      return post;
     },
   })
   .query("posts", {
@@ -38,6 +38,16 @@ export const postRouter = createRouter()
     input: getSinglePostSchema,
     resolve({ input, ctx }) {
       return ctx.prisma.post.findUnique({
+        where: {
+          id: input.postId,
+        },
+      });
+    },
+  })
+  .mutation("delete-post", {
+    input: getSinglePostSchema,
+    resolve({ input, ctx }) {
+      return ctx.prisma.post.delete({
         where: {
           id: input.postId,
         },
